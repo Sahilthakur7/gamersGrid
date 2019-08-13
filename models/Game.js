@@ -7,4 +7,4 @@ const gameSchema = new mongoose.Schema({
     genre: String
 });
 
-mongoose.model('Game',gameSchema);
+mongoose.model('games',gameSchema);
