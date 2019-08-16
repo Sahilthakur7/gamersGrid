@@ -3,7 +3,6 @@ import { Form, Button, Col } from 'react-bootstrap';
 
 class CreateGame extends React.Component {
     state = {
-
     }
 
     render(){
