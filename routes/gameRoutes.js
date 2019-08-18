@@ -4,6 +4,6 @@ const Game = mongoose.model('games');
 
 module.exports = app => {
     app.post('/api/games' , (req,res) => {
-
+        console.log(req);
     })
 }
