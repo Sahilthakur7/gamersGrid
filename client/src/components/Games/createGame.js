@@ -33,7 +33,6 @@ class CreateGame extends React.Component {
             genre: genre
         };
 
-        axios.get('/api/kv');
         createGame(gameObj);
     }
 
@@ -46,7 +45,6 @@ class CreateGame extends React.Component {
                     <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>Title</Form.Label>
                         <Form.Control value={state.title} onChange={(e) => this.valueChangeHandler(e,"title")} type="text" placeholder="Enter the title" />
-                        <a href="/api/kb">kb</a>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>Genre</Form.Label>
