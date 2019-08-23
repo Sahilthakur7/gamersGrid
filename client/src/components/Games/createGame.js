@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { Form, Button, Col } from 'react-bootstrap';
-import { createGame } from '../../services/gamesService';
+import {saveGame} from '../../actions/gamesActions';
 
 class CreateGame extends React.Component {
     state = {
         title: '',
-        genre: ''
+        genre: '',
+        message: ''
     };
 
     valueChangeHandler = (e,field) => {
@@ -33,7 +35,6 @@ class CreateGame extends React.Component {
             genre: genre
         };
 
-        createGame(gameObj);
     }
 
     render(){
@@ -61,4 +62,8 @@ class CreateGame extends React.Component {
     }
 }
 
-export default CreateGame;
+function mapStateToProps(state){
+    const {game} = state;
+}
+
+export default connect(mapStateToProps, { saveGame })( CreateGame );
