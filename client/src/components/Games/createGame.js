@@ -54,7 +54,6 @@ class CreateGame extends React.Component {
 
     render(){
         const { state , props} = this;
-        console.log("props",this.props);
 
         return(
             <div>

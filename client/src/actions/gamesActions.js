@@ -8,6 +8,7 @@ import {
 
 export const saveGame = (game) => (dispatch) => {
     return createGame(game).then(res => {
+        console.log("lets return res",res);
         dispatch({
             type: GAME_CREATED,
             payload: res

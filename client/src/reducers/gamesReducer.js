@@ -21,19 +21,21 @@ export default function(state = INITIAL_STATE , action){
         case GAME_CREATED:
              stateUpdateObj = {
                 game: {
-                    $set: payload.data
+                    ...payload.data
                 },
                  message: "Your game has been created"
             };
 
-            return update(state, stateUpdateObj);
+            return update(state, {$set: stateUpdateObj});
 
         case GAME_CREATION_FAILED:
              stateUpdateObj = {
                 error: {
-                    $set : payload
+                    $set : payload.data
                 }
             }
+
+            return update(state,stateUpdateObj);
         default:
             return state;
     }
