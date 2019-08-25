@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import _isEmpty from 'lodash';
 import { connect } from 'react-redux';
 import { Form, Button, Col } from 'react-bootstrap';
 import {saveGame} from '../../actions/gamesActions';
@@ -7,8 +7,7 @@ import {saveGame} from '../../actions/gamesActions';
 class CreateGame extends React.Component {
     state = {
         title: '',
-        genre: '',
-        message: ''
+        genre: ''
     };
 
     valueChangeHandler = (e,field) => {
@@ -35,12 +34,30 @@ class CreateGame extends React.Component {
             genre: genre
         };
 
+        this.setState({
+            title: '',
+            genre: ''
+        },() => this.props.saveGame(gameObj));
+    }
+
+    renderCreationMessage = () => {
+        const { message } = this.props.games;
+
+        if(message){
+            return(
+                <div>
+                    {message}
+                </div>
+            )
+        }
     }
 
     render(){
-        const { state } = this;
+        const { state , props} = this;
+        console.log("props",this.props);
 
         return(
+            <div>
             <Form>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridEmail">
@@ -58,12 +75,16 @@ class CreateGame extends React.Component {
                     Submit
                 </Button>
             </Form>
+            {this.renderCreationMessage()}
+        </div>
         );
     }
 }
 
-function mapStateToProps(state){
-    const {game} = state;
+const mapStateToProps = (state) => {
+    return{
+         games : state.games
+    }
 }
 
 export default connect(mapStateToProps, { saveGame })( CreateGame );

@@ -2,7 +2,8 @@ import {
     createGame
 } from '../services/gamesService';
 import {
-    GAME_CREATED
+    GAME_CREATED,
+    GAME_CREATION_FAILED
 } from '../reducers/gamesReducer';
 
 export const saveGame = (game) => (dispatch) => {
@@ -10,6 +11,11 @@ export const saveGame = (game) => (dispatch) => {
         dispatch({
             type: GAME_CREATED,
             payload: res
+        })
+    }).catch(err => {
+        dispatch({
+            type: GAME_CREATION_FAILED,
+            payload: err
         })
     });
 }
