@@ -4,6 +4,7 @@ import Home from './Home';
 import Header from './Header';
 import CreateGame from './Games/createGame';
 import ReduxToastr from 'react-redux-toastr';
+import GamesList from './Games/GamesList';
 
 class App extends React.Component {
     render(){
@@ -22,6 +23,7 @@ class App extends React.Component {
                 <BrowserRouter>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/games/create-game" component={CreateGame} />
+                    <Route exact path="/games" component={GamesList} />
                 </BrowserRouter>
             </div>
         )

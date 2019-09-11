@@ -48,7 +48,7 @@ class CreateGame extends React.Component {
         const { state , props} = this;
 
         return(
-            <div>
+            <div className="mt-50">
                 <Form>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridEmail">

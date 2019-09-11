@@ -26,7 +26,7 @@ class Home extends React.Component {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <small className="text-muted"><Button variant="dark">Check latest news</Button></small>
+                            <small className="text-muted"><Link to={"games"}><Button variant="dark">Check latest news</Button></Link></small>
                         </Card.Footer>
                     </Card>
                     <Card>

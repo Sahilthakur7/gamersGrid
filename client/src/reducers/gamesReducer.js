@@ -2,6 +2,8 @@ import update from 'immutability-helper';
 
 export const GAME_CREATED = 'GAME_CREATED';
 export const GAME_CREATION_FAILED = 'GAME_CREATION_FAILED';
+export const GAMES_FETCHED = 'GAMES_FETCHED';
+export const GAMES_FETCHED_FAILED = 'GAMES_FETCHED_FAILED';
 
 
 const INITIAL_STATE ={
@@ -9,6 +11,7 @@ const INITIAL_STATE ={
         title: '',
         genre: '',
     },
+    games: [],
     message: '',
     error: ''
 };
@@ -38,5 +41,12 @@ export default function(state = INITIAL_STATE , action){
             return update(state,stateUpdateObj);
         default:
             return state;
+
+        case GAMES_FETCHED :
+            stateUpdateObj = {
+                games: {
+                    $set : payload.data
+                }
+            }
     }
 }
