@@ -22,17 +22,17 @@ export default function(state = INITIAL_STATE , action){
 
     switch(action.type){
         case GAME_CREATED:
-             stateUpdateObj = {
+            stateUpdateObj = {
                 game: {
                     ...payload.data
                 },
-                 message: "Your game has been created"
+                message: "Your game has been created"
             };
 
             return update(state, {$set: stateUpdateObj});
 
         case GAME_CREATION_FAILED:
-             stateUpdateObj = {
+            stateUpdateObj = {
                 error: {
                     $set : payload.data
                 }
@@ -45,8 +45,10 @@ export default function(state = INITIAL_STATE , action){
         case GAMES_FETCHED :
             stateUpdateObj = {
                 games: {
-                    $set : payload.data
+                    $set: payload.data
                 }
             }
+
+            return update(state,stateUpdateObj);
     }
 }
