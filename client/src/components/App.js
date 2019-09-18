@@ -19,8 +19,8 @@ class App extends React.Component {
                     transitionOut="fadeOut"
                     progressBar
                     closeOnToastrClick/>
-                <Header/>
                 <BrowserRouter>
+                    <Header/>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/games/create-game" component={CreateGame} />
                     <Route exact path="/games" component={GamesList} />

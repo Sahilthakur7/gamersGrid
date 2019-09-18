@@ -10,6 +10,8 @@ const app = express();
 
 app.use(bodyParser.json())
 
+app.use('/uploads', express.static('uploads'));
+
 require('./routes/gameRoutes')(app);
 
 const PORT = 5000;
