@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const User = mongoose.model('User');
+const secret = 'lskdjfiosdfjoisjgoidifh29347839';
 
 module.exports = {
 
@@ -21,9 +23,9 @@ module.exports = {
 
         user.isCorrectPassword(password).then((same) => {
             if(same){
+                console.log('sending the cookie');
                 const payload = email;
                 const token = jwt.sign(payload, secret , {
-                    expiresIn: '3h'
                 });
                 res.cookie('token', token, {httpOnly: true}).sendStatus(200);
             }
