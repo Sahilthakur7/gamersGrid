@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { authenticate } from '../../actions/usersActions';
+import { authenticate, clearErrors } from '../../actions/usersActions';
 
 class Registration extends React.Component {
     state = {
@@ -9,6 +9,9 @@ class Registration extends React.Component {
     };
 
     onFieldChange = (e,field) => {
+        if(this.props.error){
+            this.props.clearErrors();
+        }
         this.setState({
             [field]: e.target.value
         });
@@ -23,15 +26,25 @@ class Registration extends React.Component {
             email,
             password
         };
+        this.props.authenticate(userObj);
+    }
 
-        this.setState({
-            email: '',
-            password: ''
-        },() => this.props.authenticate(userObj));
+    showError = () => {
+        const {error} = this.props;
+        const {email,password} = this.state;
+
+        if(email && password && error){
+            return(
+                <div className="red">
+                    {error}
+                </div>
+            )
+        }
     }
 
     render(){
         const {email,password} = this.state;
+        const {message,error} = this.props;
 
         return(
             <form onSubmit ={ this.onSubmit }>
@@ -44,14 +57,19 @@ class Registration extends React.Component {
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e) => this.onFieldChange(e,"password")}/>
                 </div>
-                <div className="form-group form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                    <label className="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
+                {this.showError()}
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         );
     }
 };
 
-export default connect(null, {authenticate})( Registration );
+const mapStateToProps = (state) => {
+    return{
+        error: state.user.error,
+        message: state.user.message,
+        user: state.user.user
+    }
+}
+
+export default connect(mapStateToProps, {authenticate,clearErrors})( Registration );

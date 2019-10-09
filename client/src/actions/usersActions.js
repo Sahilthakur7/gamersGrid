@@ -4,7 +4,8 @@ import {
 
 import {
     AUTHENTICATED_USER,
-    AUTHENTICATED_USER_FAILED
+    AUTHENTICATED_USER_FAILED,
+    CLEAR_ERRORS
 } from '../reducers/usersReducer';
 
 export const authenticate = (user) => (dispatch) => {
@@ -19,5 +20,11 @@ export const authenticate = (user) => (dispatch) => {
             type: AUTHENTICATED_USER_FAILED,
             payload: err
         })
+    })
+};
+
+export const clearErrors = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_ERRORS
     })
 }

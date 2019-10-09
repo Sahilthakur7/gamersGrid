@@ -1,5 +1,7 @@
+import update from 'immutability-helper';
 export const AUTHENTICATED_USER = 'AUTHENTICATED_USER';
 export const AUTHENTICATED_USER_FAILED = 'AUTHENTICATED_USER_FAILED';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 const INITIAL_STATE = {
     user: {
@@ -20,5 +22,24 @@ export default function(state = INITIAL_STATE,action){
                 },
                 message: 'You have logged In'
             }
+
+            return update(state, {$set: stateUpdatedObj});
+
+        case AUTHENTICATED_USER_FAILED:
+            stateUpdatedObj = {
+                error: payload.response.data.error
+            }
+
+            return update(state, {$set: stateUpdatedObj});
+
+        case CLEAR_ERRORS:
+            stateUpdatedObj = {
+                ...state,
+                error: ''
+            };
+
+            return update(state,{$set: stateUpdatedObj});
+        default:
+            return state;
     };
 }
