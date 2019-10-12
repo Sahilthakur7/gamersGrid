@@ -11,7 +11,7 @@ module.exports = app => {
         res.send("inside");
     });
 
-    app.get('/api/getToken',withAuth, (req,res) => {
+    app.get('/api/checkToken',withAuth, (req,res) => {
         res.status(200).send("this should print");
     })
 

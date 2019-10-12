@@ -24,8 +24,8 @@ module.exports = {
         user.isCorrectPassword(password).then((same) => {
             if(same){
                 console.log('sending the cookie');
-                const payload = email;
-                const token = jwt.sign(payload, secret , {
+                const payload = { email, "iat": Date.now() };
+                const token = jwt.sign(payload, secret , { expiresIn: '1d'
                 });
                 res.cookie('token', token, {httpOnly: true}).sendStatus(200);
             }
