@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { authenticate, clearErrors } from '../../actions/usersActions';
 
-class Registration extends React.Component {
+class Login extends React.Component {
     state = {
         email: '',
         password: ''
@@ -15,6 +15,14 @@ class Registration extends React.Component {
         this.setState({
             [field]: e.target.value
         });
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.message !== this.props.message){
+            if(this.props.message.indexOf('successfully') > -1){
+                this.props.history.push('/');
+            }
+        }
     }
 
     onSubmit =(e) => {
@@ -72,4 +80,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {authenticate,clearErrors})( Registration );
+export default connect(mapStateToProps, {authenticate,clearErrors})( Login );

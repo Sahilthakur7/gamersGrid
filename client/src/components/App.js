@@ -5,7 +5,7 @@ import Header from './Header';
 import CreateGame from './Games/createGame';
 import ReduxToastr from 'react-redux-toastr';
 import GamesList from './Games/GamesList';
-import Registration from './Users/registration';
+import Login from './Users/login';
 
 class App extends React.Component {
     render(){
@@ -25,7 +25,7 @@ class App extends React.Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/games/create-game" component={CreateGame} />
                     <Route exact path="/games" component={GamesList} />
-                    <Route exact path="/users/registration" component={Registration} />
+                    <Route exact path="/users/authenticate" component={Login} />
                 </BrowserRouter>
             </div>
         )

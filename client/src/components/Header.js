@@ -25,7 +25,10 @@ class Header extends React.Component {
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets" className="nav-items">Community</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes" className="nav-items">Login</Nav.Link>
+                        <a href="/api/secret">Check</a>
+                        <Link to="/users/authenticate">
+                            <Nav.Link eventKey={2} href="#memes" className="nav-items">Login</Nav.Link>
+                        </Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

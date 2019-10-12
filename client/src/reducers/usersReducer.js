@@ -20,7 +20,7 @@ export default function(state = INITIAL_STATE,action){
                 user: {
                     ...payload.data
                 },
-                message: 'You have logged In'
+                message: 'You have successfully logged In'
             }
 
             return update(state, {$set: stateUpdatedObj});
