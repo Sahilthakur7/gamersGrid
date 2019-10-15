@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     user: {
 
     },
+    loggedIn: false,
     message:'',
     error: ''
 };
@@ -22,6 +23,7 @@ export default function(state = INITIAL_STATE,action){
                 user: {
                     ...payload.data
                 },
+                loggedIn: true,
                 message: 'You have successfully logged In'
             }
 
@@ -44,6 +46,7 @@ export default function(state = INITIAL_STATE,action){
         case LOGGED_OUT:
             stateUpdatedObj = {
                 ...state,
+                loggedIn: false,
                 message: 'You have been logged out'
             };
 

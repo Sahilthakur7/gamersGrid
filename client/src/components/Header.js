@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 class Header extends React.Component {
     render(){
+        console.log("loggedIn",this.props.loggedIn);
         return(
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Link to={`/`}>
@@ -39,4 +40,10 @@ class Header extends React.Component {
     }
 }
 
-export default connect(null,{logout})( Header );
+const mapStateToProps = (state) => {
+    return {
+        loggedIn: state.user.loggedIn
+    }
+}
+
+export default connect(mapStateToProps,{logout})( Header );
