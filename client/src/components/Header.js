@@ -2,6 +2,8 @@ import React from 'react';
 import { Navbar, Nav , NavDropdown} from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { logout } from '../actions/usersActions';
+import { connect } from 'react-redux';
 
 class Header extends React.Component {
     render(){
@@ -29,6 +31,7 @@ class Header extends React.Component {
                         <Link to="/users/authenticate">
                             <Nav.Link eventKey={2} href="#memes" className="nav-items">Login</Nav.Link>
                         </Link>
+                        <a onClick={this.props.logout}>Logout</a>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -36,4 +39,4 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default connect(null,{logout})( Header );

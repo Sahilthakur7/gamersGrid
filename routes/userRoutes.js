@@ -29,6 +29,10 @@ module.exports = app => {
 
     app.post('/api/authenticate', async (req,res) => {
         UsersController.authenticate(req,res);
+    });
+
+    app.get('/api/logout', (req,res) => {
+        res.clearCookie('token').send({message: 'You have been logged out!'});
     })
 }
 
