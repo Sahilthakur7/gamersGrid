@@ -23,7 +23,6 @@ export default function(state = INITIAL_STATE,action){
                 user: {
                     ...payload.data
                 },
-                loggedIn: true,
                 message: 'You have successfully logged In'
             }
 

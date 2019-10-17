@@ -4,10 +4,40 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/usersActions';
 import { connect } from 'react-redux';
+import Cookies from 'js-cookie';
 
 class Header extends React.Component {
+
+    state = {
+        isLoggedIn: false
+    }
+
+    componentDidMount() {
+        const token = Cookies.get('token');
+        if(token){
+            this.setState({
+                isLoggedIn: true
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.loggedIn !== this.props.loggedIn){
+            const token = Cookies.get('token');
+            if(token){
+                this.setState({
+                    isLoggedIn: true
+                });
+            }else{
+                this.setState({
+                    isLoggedIn: false
+                })
+            }
+        }
+    }
+
     render(){
-        console.log("loggedIn",this.props.loggedIn);
+        const {isLoggedIn} = this.state;
         return(
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Link to={`/`}>
@@ -28,11 +58,14 @@ class Header extends React.Component {
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets" className="nav-items">Community</Nav.Link>
-                        <a href="/api/secret">Check</a>
-                        <Link to="/users/authenticate">
-                            <Nav.Link eventKey={2} href="#memes" className="nav-items">Login</Nav.Link>
-                        </Link>
-                        <a onClick={this.props.logout}>Logout</a>
+                        <a href="/api/secret" className="nav-items nav-link">Check</a>
+                        { isLoggedIn ?
+                                <a href="#" className="nav-items nav-link" onClick={() => this.props.logout()}>Logout</a>
+                                :
+                                <Link to="/users/authenticate">
+                                    <Nav.Link eventKey={2} href="#memes" className="nav-items">Login</Nav.Link>
+                                </Link>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

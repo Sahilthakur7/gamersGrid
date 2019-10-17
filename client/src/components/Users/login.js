@@ -1,11 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { authenticate, clearErrors } from '../../actions/usersActions';
+import Cookies from 'js-cookie';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        redirect: false
     };
 
     onFieldChange = (e,field) => {
@@ -15,6 +18,15 @@ class Login extends React.Component {
         this.setState({
             [field]: e.target.value
         });
+    }
+
+    componentDidMount(){
+        const token = Cookies.get('token');
+        if(token){
+            this.setState({
+                redirect: true
+            })
+        }
     }
 
     componentDidUpdate(prevProps){
@@ -51,24 +63,28 @@ class Login extends React.Component {
     }
 
     render(){
-        const {email,password} = this.state;
+        const {email,password,redirect} = this.state;
         const {message,error} = this.props;
 
-        return(
-            <form onSubmit ={ this.onSubmit }>
-                <div className="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={email} onChange={(e) => this.onFieldChange(e,"email")}/>
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e) => this.onFieldChange(e,"password")}/>
-                </div>
-                {this.showError()}
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-        );
+        if(redirect){
+            return <Redirect to="/" />
+        }else{
+            return(
+                <form onSubmit ={ this.onSubmit }>
+                    <div className="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={email} onChange={(e) => this.onFieldChange(e,"email")}/>
+                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div className="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e) => this.onFieldChange(e,"password")}/>
+                    </div>
+                    {this.showError()}
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+            );
+        }
     }
 };
 
