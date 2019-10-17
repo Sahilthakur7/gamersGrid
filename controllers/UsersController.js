@@ -27,7 +27,7 @@ module.exports = {
                 const payload = { email, "iat": Date.now() };
                 const token = jwt.sign(payload, secret , { expiresIn: '1d'
                 });
-                res.cookie('token', token, {httpOnly: true}).sendStatus(200);
+                res.cookie('token', token, {httpOnly: false}).sendStatus(200);
             }
             else{
                 return res.status(401).json({error: "Incorrect password"});
