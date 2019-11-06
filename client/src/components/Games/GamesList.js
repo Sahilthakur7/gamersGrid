@@ -1,6 +1,7 @@
 import React,{Fragment} from 'react';
 import { connect } from 'react-redux';
 import { fetchAllGames } from '../../actions/gamesActions';
+import {Link} from 'react-router-dom';
 
 class GamesList extends React.Component {
     state = {
@@ -27,19 +28,26 @@ class GamesList extends React.Component {
         )
     }
 
+    showGame = (gameId) => {
+        this.props.history.push(`/games/${gameId}`);
+    }
+
     renderGames = () => {
-        const { games } = this.state;
+        let { games } = this.state;
+        if(games.length === 0){
+            games = this.props.games;
+        }
         let gamesList;
         if(games){
             gamesList = games.map((game) => {
                 return(
-                    <tr className="row100 body">
-                        <td className="cell100 column1">{game.title}</td>
-                        <td className="cell100 column2">{game.genre}</td>
-                        <td className="cell100 column3">9:00 AM - 11:00 AM</td>
-                        <td className="cell100 column4">Aaron Chapman</td>
-                        <td className="cell100 column5">10</td>
-                    </tr>
+                    <tr className="row100 body pointer" onClick={() => this.showGame(game._id)}>
+                            <td className="cell100 column1">{game.title}</td>
+                            <td className="cell100 column2">{game.genre}</td>
+                            <td className="cell100 column3">9:00 AM - 11:00 AM</td>
+                            <td className="cell100 column4">Aaron Chapman</td>
+                            <td className="cell100 column5">10</td>
+                        </tr>
                 )
             })
         }

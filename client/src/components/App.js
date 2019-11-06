@@ -5,6 +5,7 @@ import Header from './Header';
 import CreateGame from './Games/createGame';
 import ReduxToastr from 'react-redux-toastr';
 import GamesList from './Games/GamesList';
+import Game from './Games/Game';
 import Login from './Users/login';
 import Secret from './Users/secret';
 import withAuth from './Users/withAuth';
@@ -29,6 +30,7 @@ class App extends React.Component {
                     <Route exact path="/games" component={GamesList} />
                     <Route exact path="/users/authenticate" component={Login} />
                     <Route exact path="/users/secret" component={withAuth(Secret)} />
+                    <Route exact path="/games/:id" component={Game}/>
                 </BrowserRouter>
             </div>
         )
