@@ -29,7 +29,7 @@ class GamesList extends React.Component {
     }
 
     showGame = (gameId) => {
-        this.props.history.push(`/games/${gameId}`);
+        this.props.history.push(`/games/${gameId}/show`);
     }
 
     renderGames = () => {

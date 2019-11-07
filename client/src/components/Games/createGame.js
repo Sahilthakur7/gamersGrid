@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { Form, Button, Col } from 'react-bootstrap';
 import {saveGame} from '../../actions/gamesActions';
 import {toastr} from 'react-redux-toastr';
+import { uploadImageMulter } from '../../services/imageService';
 
 
 class CreateGame extends React.Component {
     state = {
         title: '',
-        genre: ''
+        genre: '',
+        state: ''
     };
 
     valueChangeHandler = (e,field) => {
@@ -44,6 +46,19 @@ class CreateGame extends React.Component {
         }
     }
 
+    uploadImage = (e) => {
+        let imageFormObj = new FormData();
+
+// imageFormObj.append("imageName", "multer-image-" + Date.now());
+        imageFormObj.append("imageData", e.target.files[0]);
+
+        this.setState({
+            image: URL.createObjectURL(e.target.files[0])
+        })
+
+        uploadImageMulter(imageFormObj);
+    }
+
     render(){
         const { state , props} = this;
 
@@ -58,6 +73,12 @@ class CreateGame extends React.Component {
                         <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>Genre</Form.Label>
                             <Form.Control value={state.genre} onChange={(e) => this.valueChangeHandler(e,"genre")} type="text" placeholder="Enter the genre" />
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="formGridEmail">
+                            <Form.Label>Attached Image</Form.Label>
+                            <Form.Control
+                                onChange={(e) => this.uploadImage(e)} type="file" placeholder="Enter the image" />
+                            <img src={this.state.image} alt="game-image"/>
                         </Form.Group>
                     </Form.Row>
 

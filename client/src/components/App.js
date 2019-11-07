@@ -30,7 +30,7 @@ class App extends React.Component {
                     <Route exact path="/games" component={GamesList} />
                     <Route exact path="/users/authenticate" component={Login} />
                     <Route exact path="/users/secret" component={withAuth(Secret)} />
-                    <Route exact path="/games/:id" component={Game}/>
+                    <Route exact path="/games/:id/show" component={Game}/>
                 </BrowserRouter>
             </div>
         )
